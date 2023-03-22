@@ -1,129 +1,87 @@
-   	//AAU Registration-Page Validtion 
-function showAlert() {
-    confirm("Sure, Filled with correct information?");
+   	<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Registration Form</title>
+	  <link rel="stylesheet" type="text/css" href="styles.css" />
     
-}
-function doValidation() {
-let patt = /[0-9]+/;
-let emailPattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/;
-let passwordPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-if(document.register.firstName.value == "") {
-    alert("Please provide your first name!");
-    document.register.firstName.focus();
-    return false;
-}
-if(document.register.firstName.value.match(patt)) {
-    alert("First name can not contain number!");
-    document.register.firstName.focus();
-    return false;
-}
-if(document.register.lastName.value == "") {
-    alert("Please provide your last name!");
-    document.register.lastName.focus();
-    return false;
-}
-if(document.register.lastName.value.match(patt)) {
-    alert("Last name can not contain number!");
-    document.register.lastName.focus();
-    return false;
-}
-if(document.register.email.value == "") {
-    alert("Please provide your email!");
-    document.register.email.focus();
-    return false;
-}
-if(!(document.register.email.value.match(emailPattern))) {
-    alert("Please put correct email address!");
-    document.register.email.focus();
-    return false;
-}
-if(document.register.password.value == "") {
-    alert("Please provide password!");
-    document.register.password.focus();
-    return false;
-}
-if(document.register.password.value.length < 8) {
-    alert("Please provide at least 8 digit password");
-    document.register.password.focus();
-    return false;
-}
-if(!(document.register.password.value.match(passwordPattern))) {
-    alert("Password should contain capital letter, small letter and number!");
-    document.register.password.focus();
-    return false;
-}
-if(document.register.sex.value == "") {
-    alert("Please choose your sex");
-    //document.register.sex.focus();
-    return false;
-}
-let language = [register.english, register.amharic, register.others, register.none];
-let ischecked = false;
-for(let i = 0; i < language.length; i++) {
-    if(language[i].checked) {
-        ischecked =true;
-        break;
-    }
-if(ischecked) {
-    return true;
-} else{
-    alert("Please choose language");
-    return false;
-}}
-if(document.register.file.value == "") {
-    alert("Please upload profile!");
-    document.register.file.focus();
-    return false;
-}
-if(document.getElementById("program").value == document.getElementById("program")[0].value) {
-    alert("Please choose program!")
-    document.register.program.focus();
-    return false;
-}
-return true;
-} 
-             //AAU Login page validation
-var email = document.forms['login']['email'];
-var password = document.forms['login']['password'];
-
-email.addEventListener('textInput', email_Verify);
-password.addEventListener('textInput', pass_Verify);
-
-const passwordPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
-const emailPattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/;
-
-function validated() 
-{
-    function email_Verify()
-    {
-        if (email.value.match(emailPattern)) 
-        {
-            email.style.border = "1px solid silver";
-            return true;
-        }else 
-        {
-                email.style.border = "1px solid red";
-                email.focus();
-                alert("Please include \"@gmail.com\"")
-                return false;
-        }
-    }
-    function pass_Verify()
-    {
-        if (password.value.match(passwordPattern)) 
-        {
-            password.style.border = "1px solid silver";
-            return true;
-        }else 
-        {
-                password.style.border = "1px solid red";
-                password.focus();
-                alert("put correct email and password(at least eight(8))");
-                return false;
-        }
-    }
     
-}
+  </head>
 
+  <body>
+    <form action="register.php" class="RegistrationForm" name="register" method="post" onsubmit="return(doValidation())">
+      <h1>Addis Ababa University Colleage of Natural Science Student Registration Form</h1>
+    <p>Please fill out this form with the required information</p>
+      <fieldset>
+        <label>Enter Your First Name: <input type="text" name="firstName" /></label>
+        <label>Enter Your Last Name: <input type="text" name="lastName"  /></label>
+        <label>Enter Your Email: <input type="email" name="email"  /></label>
+        <label>Create a New Password: <input type="password" name="password"  placeholder="At least 8 digit(mix of numbers,small letters,capital letters) "  /></label>
+      </fieldset>
+      <fieldset>
+        <label required>Sex:
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" class="inline" value="M"/>Male
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" class="inline" value="F"/> Female</label>
+        <label>Languages:
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="english" class="inline" value="English"/>English
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="amharic" class="inline" value="Amharic"/> Amharic
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="others" class="inline" value="Others"/> Others
+          <br>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="none" class="inline" value="None"/> None
+        </label>
+      </fieldset>
+      <fieldset>
+        <label>Upload a profile picture: <input type="file" name="file" /></label>
+        <label>Acadamic Year: <input type="number" name="year" placeholder="2021/22" disabled/>
+			  </label>
+        <div required>
+          <label>Programs: 
+            <select name="program" id="program">
+              <option value="">(select program)</option>
+              <option value="1">Bachelor of science in Computer Science</option>
+              <option value="2">Bachelor of science in Biology</option>
+              <option value="3">Bachelor of science in Chemistry</option>
+              <option value="4">Bachelor of science in Physics</option>
+              <option value="5">Bachelor of science in Mathemathics</option>
+              <option value="6">Bachelor of science in Statistics</option>
+              <option value="7">Bachelor of science in Earth Science</option>
+            </select>
+          </label>
+        </div>
+        
+        <label>Provide a bio:(Optional)
+          <textarea name="bio" rows="3" cols="30"></textarea>
+			  </label>
+      </fieldset>
+
+      <script>
+        document.write(Date());
+      </script>
+      <input type="submit" onclick="showAlert()" value="Create Account" class="create"/>
+      <p class="Log">Already Registered? <a href="#" id="LogMessage">Login</a></p>
+    </form>
+
+    <form action="login.php" class="LoginForm" name="login" method="post" onsubmit="return validated()">
+      <h1>Addis Ababa University Colleage of Natural Science Student Login Page</h1>
+      <fieldset>
+        <label>Email: <input type="email" name="email" placeholder="Email" /></label>
+        <div id="email_error"></div>
+        <label>Password: <input type="password" name="password" placeholder="Password"  /></label>
+        <div id="pass_error"></div><br><br>
+        <input type="submit" value="Login" class="login"> 
+        <p class="Reg">Not Registered? <a href="#" id="RegMessage">Register</a></p>
+      </fieldset>
+    </form>
+    <script src="index.js"></script>
+    <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+    <script>
+      $('.Log, .Reg a').click(function() {
+    $("form").animate({height: "toggle", capacity: "toggle"}, "slow");
+    });
+    </script>
+    
+
+  </body>
+
+</html>
 
 
